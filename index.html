@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Prompt Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>AI VIDEO PROMPT <span class="highlight">GENERATOR</span></h1>
+            <p>Create dynamic, professional prompts for VIDU, SEEDREAM, and KLING.</p>
+        </header>
+
+        <main>
+            <div class="builder-section">
+                <div class="control-group">
+                    <label for="platform">Platform</label>
+                    <select id="platform" class="select-input">
+                        <option value="generic">Generic (All Tools)</option>
+                        <option value="vidu">VIDU</option>
+                        <option value="kling">KLING</option>
+                        <option value="seedream">SEEDREAM</option>
+                        <option value="luma">Luma Dream Machine</option>
+                    </select>
+                </div>
+
+                <!-- Subject Section -->
+                <div class="control-group">
+                    <label for="subject">1. Subject & Action</label>
+                    <input type="text" id="subject" placeholder="e.g., Rock band performing live, guitarist solo..."
+                        value="Rock band performing live">
+                </div>
+
+                <!-- Negative Prompt Section -->
+                <div class="control-group">
+                    <label for="negative-prompt">Negative Prompt (Avoid)</label>
+                    <input type="text" id="negative-prompt" placeholder="e.g., blurry, distorted, text, watermark...">
+                </div>
+
+                <!-- Camera Angle Section -->
+                <div class="control-group">
+                    <label>2. Camera Angle</label>
+                    <div class="options-grid" id="angle-options">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Camera Movement Section -->
+                <div class="control-group">
+                    <label>3. Camera Movement</label>
+                    <div class="options-grid" id="movement-options">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Visual Style Section -->
+                <div class="control-group">
+                    <label>4. Visual Style & Effects</label>
+                    <div class="options-grid" id="style-options">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <h2>Generated Prompt</h2>
+                <div class="prompt-display">
+                    <textarea id="final-prompt" readonly></textarea>
+                    <div class="actions">
+                        <button id="copy-btn" class="btn primary">
+                            <span class="icon">📋</span> Copy to Clipboard
+                        </button>
+                        <button id="clear-btn" class="btn secondary">
+                            <span class="icon">↺</span> Reset
+                        </button>
+                    </div>
+                </div>
+                <div id="copy-message" class="toast">Copied!</div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
