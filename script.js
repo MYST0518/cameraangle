@@ -99,7 +99,6 @@ const state = {
     angle: "",
     movement: "",
     style: ""
-    style: ""
 };
 
 // Advanced State (New)
@@ -123,8 +122,6 @@ const angleContainer = document.getElementById('angle-options');
 const movementContainer = document.getElementById('movement-options');
 const styleContainer = document.getElementById('style-options');
 const finalPromptArea = document.getElementById('final-prompt');
-const copyBtn = document.getElementById('copy-btn');
-const clearBtn = document.getElementById('clear-btn');
 const copyBtn = document.getElementById('copy-btn');
 const clearBtn = document.getElementById('clear-btn');
 const copyMessage = document.getElementById('copy-message');
