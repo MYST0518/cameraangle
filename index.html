@@ -18,10 +18,16 @@
         <header>
             <h1>AI VIDEO PROMPT <span class="highlight">GENERATOR</span></h1>
             <p>Create dynamic, professional prompts for VIDU, SEEDREAM, and KLING.</p>
+
+            <div class="mode-toggle-container">
+                <button id="mode-simple" class="mode-btn active">Simple Mode</button>
+                <button id="mode-advanced" class="mode-btn">Advanced Mode</button>
+            </div>
         </header>
 
         <main>
-            <div class="builder-section">
+            <!-- SIMPLE MODE -->
+            <div id="simple-builder" class="builder-section">
                 <div class="control-group">
                     <label for="platform">Platform</label>
                     <select id="platform" class="select-input">
@@ -46,9 +52,17 @@
                     <input type="text" id="negative-prompt" placeholder="e.g., blurry, distorted, text, watermark...">
                 </div>
 
+                <!-- typical Scenes Section -->
+                <div class="control-group">
+                    <label>2. Typical Scenes (Subject Presets)</label>
+                    <div id="scenes-container" class="scenes-grid">
+                        <!-- Categories and Options injected by JS -->
+                    </div>
+                </div>
+
                 <!-- Camera Angle Section -->
                 <div class="control-group">
-                    <label>2. Camera Angle</label>
+                    <label>3. Camera Angle</label>
                     <div class="options-grid" id="angle-options">
                         <!-- Options injected by JS -->
                     </div>
@@ -56,7 +70,7 @@
 
                 <!-- Camera Movement Section -->
                 <div class="control-group">
-                    <label>3. Camera Movement</label>
+                    <label>4. Camera Movement</label>
                     <div class="options-grid" id="movement-options">
                         <!-- Options injected by JS -->
                     </div>
@@ -64,10 +78,72 @@
 
                 <!-- Visual Style Section -->
                 <div class="control-group">
-                    <label>4. Visual Style & Effects</label>
+                    <label>5. Visual Style & Effects</label>
                     <div class="options-grid" id="style-options">
                         <!-- Options injected by JS -->
                     </div>
+                </div>
+            </div>
+
+            <!-- ADVANCED MODE -->
+            <div id="advanced-builder" class="builder-section hidden">
+                <div class="manual-guide">
+                    <p><strong>Scene Decomposition:</strong> Break down your prompt into structured elements for better
+                        control (Hailuo 02/Vidu recommended).</p>
+                </div>
+
+                <div class="control-group">
+                    <label for="adv-shot">1. Shot / Scale (画角)</label>
+                    <select id="adv-shot" class="select-input">
+                        <option value="">Select Shot Scale</option>
+                        <option value="Extreme Close-Up">Extreme Close-Up (目や指先など)</option>
+                        <option value="Close-Up">Close-Up (顔アップ)</option>
+                        <option value="Medium Shot">Medium Shot (腰から上)</option>
+                        <option value="Full Shot">Full Shot (全身)</option>
+                        <option value="Wide Shot">Wide Shot (周囲の風景含む)</option>
+                        <option value="Establish Shot">Establish Shot (状況説明用の引き画)</option>
+                        <option value="Bird's Eye View">Bird's Eye View (俯瞰)</option>
+                        <option value="Worm's Eye View">Worm's Eye View (あおり)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="adv-action">2. Action / Description (行動・内容)</label>
+                    <textarea id="adv-action" class="text-area-input"
+                        placeholder="Example: A girl running through neon streets, looking back in fear..."></textarea>
+                </div>
+
+                <div class="control-group">
+                    <label for="adv-camera">3. Camera Work (カメラワーク)</label>
+                    <select id="adv-camera" class="select-input">
+                        <option value="">Select Camera Movement</option>
+                        <option value="Fixed/Static">Fixed / Static (固定)</option>
+                        <option value="Handheld">Handheld (手持ち・手ブレ)</option>
+                        <option value="Dolly In">Dolly In (寄り)</option>
+                        <option value="Dolly Out">Dolly Out (引き)</option>
+                        <option value="Tracking Shot">Tracking Shot (追従)</option>
+                        <option value="Pan Right">Pan Right (右へ)</option>
+                        <option value="Pan Left">Pan Left (左へ)</option>
+                        <option value="Arc Shot">Arc Shot (回り込み)</option>
+                        <option value="Crane Shot">Crane Shot (クレーン)</option>
+                        <option value="FPV">FPV (一人称視点)</option>
+                        <option value="Dutch Angle">Dutch Angle (斜め)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="adv-lighting">4. Lighting / Mood (照明・雰囲気)</label>
+                    <input type="text" id="adv-lighting" class="text-input"
+                        placeholder="e.g., Cinematic lighting, backlighting, volumetric fog, cyberpunk neon...">
+                </div>
+
+                <div class="control-group">
+                    <label for="adv-format">Output Format</label>
+                    <select id="adv-format" class="select-input">
+                        <option value="standard">Standard: (shot), (action), (camera), (light)</option>
+                        <option value="structured">Structured: [Shot: ...], [Action: ...]</option>
+                        <option value="narrative">Narrative: A ... shot of ... with ... camera.</option>
+                    </select>
                 </div>
             </div>
 

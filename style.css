@@ -138,6 +138,7 @@ select.select-input option {
     text-align: center;
     font-size: 0.9rem;
     user-select: none;
+    position: relative;
 }
 
 .option-card:hover {
@@ -145,12 +146,41 @@ select.select-input option {
     transform: translateY(-2px);
 }
 
-.option-card.selected {
-    background: rgba(0, 243, 255, 0.15);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-    font-weight: 600;
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+color: var(--accent-color);
+font-weight: 600;
+box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+/* Tooltip */
+.option-card::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 200px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid var(--accent-color);
+    color: #fff;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    white-space: normal;
+    font-weight: normal;
+    line-height: 1.4;
+}
+
+.option-card:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Preview Section */
@@ -229,6 +259,86 @@ textarea {
 .btn.secondary:hover {
     border-color: var(--text-primary);
     color: var(--text-primary);
+}
+
+/* Mode Toggle */
+.mode-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.mode-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-display);
+    transition: all 0.3s;
+}
+
+.mode-btn.active,
+.mode-btn:hover {
+    background: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Manual Guide */
+.manual-guide {
+    background: rgba(0, 243, 255, 0.05);
+    border-left: 3px solid var(--accent-color);
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Text Area Input */
+.text-area-input {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-family: var(--font-main);
+    transition: border-color 0.3s;
+    resize: vertical;
+}
+
+.text-area-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.text-input {
+    /* Reusing text style but ensure class exists */
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-family: var(--font-main);
+    transition: border-color 0.3s;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
 }
 
 .toast {

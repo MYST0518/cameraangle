@@ -28,6 +28,55 @@ const optionsData = {
         { label: "Whip Pan", value: "Fast whip pan transition, blur effect" },
         { label: "Bullet Time", value: "Bullet time effect, time frozen, camera moving around" }
     ],
+    scenes: [
+        // Members
+        { label: "Vocal: Mic Grip", value: "Vocalist gripping microphone tightly, singing with intense emotion, sweat on face, close-up", category: "Members" },
+        { label: "Guitar: Shredding", value: "Close-up of guitarist's fingers on fretboard, fast solo, blurring motion, focus on hands", category: "Members" },
+        { label: "Drummer: Front", value: "Frontal view of drummer hitting crash cymbal, hair flying, intense expression", category: "Members" },
+        { label: "Bass: Groove", value: "Bassist rhythmically nodding, finger style picking, standing near drum riser", category: "Members" },
+        { label: "Keyboards: Side", value: "Side profile of keyboardist playing synthesizer, hands visible, surrounded by keyboards", category: "Members" },
+        { label: "Vocal: Reach", value: "Vocalist reaching hand out towards the audience, connecting with fans, emotional moment", category: "Members" },
+        { label: "Guitar: Jump", value: "Guitarist jumping off the drum riser, mid-air freeze frame, energetic pose", category: "Members" },
+        { label: "Back-to-Back", value: "Guitarist and Bassist playing back-to-back, leaning on each other, classic rock pose", category: "Members" },
+        { label: "Drum: Stick Twirl", value: "Drummer twirling drumsticks between beats, showmanship, confident smile", category: "Members" },
+        { label: "Vocal: Silhouette", value: "Silhouette of vocalist against bright majestic spotlight, raising microphone stand", category: "Members" },
+
+        // Stage/Action
+        { label: "Entrance: Shadow", value: "Band members walking onto stage from backstage shadows, backlit, anticipation", category: "Stage" },
+        { label: "Pre-show Huddle", value: "Band members huddling together before the show, fist bump, unity", category: "Stage" },
+        { label: "Final Bow", value: "Full band holding hands and bowing to the audience, end of show, gratitude", category: "Stage" },
+        { label: "Call & Response", value: "Vocalist holding mic out to crowd, waiting for response, interactive moment", category: "Stage" },
+        { label: "Headbanging", value: "Band members headbanging in synchronization, hair flying, heavy metal energy", category: "Stage" },
+        { label: "Crowd Surf", value: "Singer crowd surfing on top of the audience hands, looking at ceiling", category: "Stage" },
+        { label: "Confetti Pop", value: "Massive confetti explosion covering the stage, celebration, bright colors", category: "Stage" },
+        { label: "Pyro Flames", value: "Pyrotechnic flames shooting up from stage floor, heat haze, dramatic lighting", category: "Stage" },
+        { label: "Laser Scan", value: "Green laser beams scanning across the smoke-filled stage, futuristic atmosphere", category: "Stage" },
+        { label: "Spotlight Search", value: "Spotlights searching the dark stage before landing on the lead singer", category: "Stage" },
+
+        // Audience/Venue
+        { label: "Front Row View", value: "POV from the front row looking up at the rockstar, screaming fans nearby", category: "Audience" },
+        { label: "Crowd Jump", value: "Thousands of people jumping in unison, wave of energy, wide shot of venue", category: "Audience" },
+        { label: "Phone Lights", value: "Sea of smartphone flashlights illuminating the dark arena, slow ballad atmosphere", category: "Audience" },
+        { label: "Mosh Pit", value: "Circular mosh pit forming in the crowd, high energy movement, chaotic", category: "Audience" },
+        { label: "Security Guard", value: "Stoic security guard watching the crowd, barrier in foreground, band blurry in background", category: "Audience" },
+        { label: "Sound Desk", value: "View from the sound engineer's mixing desk, meters glowing, full stage view in distance", category: "Audience" },
+        { label: "Stadium Back", value: "Wide shot from the very back of the stadium, showcasing the massive scale of the concert", category: "Audience" },
+        { label: "Crowd POV", value: "POV of a fan raising hand with rock sign (horns), band in focus on stage", category: "Audience" },
+        { label: "Crying Fan", value: "Emotional fan crying with joy in the front row, overwhelmed by the music", category: "Audience" },
+        { label: "Merch Stand", value: "Long line of fans waiting at the merchandise stand, buying t-shirts", category: "Audience" },
+
+        // Artistic/B-Roll
+        { label: "Pedals", value: "Close-up of guitar effects pedals with red LEDs glowing, foot stepping on switch", category: "Artistic" },
+        { label: "Setlist", value: "Paper setlist taped to the stage floor, handwritten song titles, slightly worn", category: "Artistic" },
+        { label: "Snare Hit", value: "Slow motion close-up of drumstick hitting snare drum, resonance, dust flying", category: "Artistic" },
+        { label: "Sweat", value: "Extreme close-up of sweat dripping from musician's face, intense physical performance", category: "Artistic" },
+        { label: "Sunglasses", value: "Reflection of the cheering crowd seen in the vocalist's sunglasses", category: "Artistic" },
+        { label: "Smoke Fog", value: "Thick fog rolling across the stage floor, mystical atmosphere, blue lighting", category: "Artistic" },
+        { label: "Amp Glow", value: "Orange glow of the amplifier power tube in the dark, vintage equipment vibe", category: "Artistic" },
+        { label: "Broken String", value: "Broken guitar string loose and hanging from the headstock, raw rock n roll", category: "Artistic" },
+        { label: "Cymbal Splash", value: "Water splashing off a cymbal as it is struck, dynamic liquid motion", category: "Artistic" },
+        { label: "Tuning", value: "Silhouette of a guitar tech tuning a guitar on the side of the stage", category: "Artistic" }
+    ],
     styles: [
         { label: "Cinematic 4K", value: "Cinematic lighting, 4k, highly detailed, photorealistic" },
         { label: "Music Video", value: "High energy music video style, strobe lights, smoke" },
@@ -50,24 +99,54 @@ const state = {
     angle: "",
     movement: "",
     style: ""
+    style: ""
 };
+
+// Advanced State (New)
+const advancedState = {
+    shot: "",
+    action: "",
+    camera: "",
+    lighting: "",
+    format: "standard"
+};
+
+// Current Mode
+let currentMode = "simple"; // 'simple' or 'advanced'
 
 // DOM Elements
 const platformSelect = document.getElementById('platform');
 const subjectInput = document.getElementById('subject');
 const negativeInput = document.getElementById('negative-prompt');
+const scenesContainer = document.getElementById('scenes-container'); // NEW
 const angleContainer = document.getElementById('angle-options');
 const movementContainer = document.getElementById('movement-options');
 const styleContainer = document.getElementById('style-options');
 const finalPromptArea = document.getElementById('final-prompt');
 const copyBtn = document.getElementById('copy-btn');
 const clearBtn = document.getElementById('clear-btn');
+const copyBtn = document.getElementById('copy-btn');
+const clearBtn = document.getElementById('clear-btn');
 const copyMessage = document.getElementById('copy-message');
+
+// Advanced DOM Elements
+const modeSimpleBtn = document.getElementById('mode-simple');
+const modeAdvancedBtn = document.getElementById('mode-advanced');
+const simpleBuilder = document.getElementById('simple-builder');
+const advancedBuilder = document.getElementById('advanced-builder');
+
+const advShotSelect = document.getElementById('adv-shot');
+const advActionInput = document.getElementById('adv-action');
+const advCameraSelect = document.getElementById('adv-camera');
+const advLightingInput = document.getElementById('adv-lighting');
+const advFormatSelect = document.getElementById('adv-format');
 
 // Initialize
 function init() {
+    renderScenes(optionsData.scenes, scenesContainer); // NEW
     renderOptions(optionsData.angles, angleContainer, 'angle');
     renderOptions(optionsData.movements, movementContainer, 'movement');
+
     renderOptions(optionsData.styles, styleContainer, 'style');
 
     updatePrompt();
@@ -90,6 +169,111 @@ function init() {
 
     copyBtn.addEventListener('click', copyToClipboard);
     clearBtn.addEventListener('click', resetState);
+
+    // Advanced Mode Event Listeners
+    modeSimpleBtn.addEventListener('click', () => switchMode('simple'));
+    modeAdvancedBtn.addEventListener('click', () => switchMode('advanced'));
+
+    advShotSelect.addEventListener('change', (e) => {
+        advancedState.shot = e.target.value;
+        updatePrompt();
+    });
+
+    advActionInput.addEventListener('input', (e) => {
+        advancedState.action = e.target.value;
+        updatePrompt();
+    });
+
+    advCameraSelect.addEventListener('change', (e) => {
+        advancedState.camera = e.target.value;
+        updatePrompt();
+    });
+
+    advLightingInput.addEventListener('input', (e) => {
+        advancedState.lighting = e.target.value;
+        updatePrompt();
+    });
+
+    advFormatSelect.addEventListener('change', (e) => {
+        advancedState.format = e.target.value;
+        updatePrompt();
+    });
+}
+
+// Mode Switching Logic
+function switchMode(mode) {
+    currentMode = mode;
+
+    if (mode === 'simple') {
+        modeSimpleBtn.classList.add('active');
+        modeAdvancedBtn.classList.remove('active');
+        simpleBuilder.classList.remove('hidden');
+        advancedBuilder.classList.add('hidden');
+    } else {
+        modeSimpleBtn.classList.remove('active');
+        modeAdvancedBtn.classList.add('active');
+        simpleBuilder.classList.add('hidden');
+        advancedBuilder.classList.remove('hidden');
+    }
+    updatePrompt();
+}
+
+// Render Scenes (Categorized)
+function renderScenes(scenes, container) {
+    container.innerHTML = '';
+
+    // Group by category
+    const categories = {};
+    scenes.forEach(scene => {
+        if (!categories[scene.category]) {
+            categories[scene.category] = [];
+        }
+        categories[scene.category].push(scene);
+    });
+
+    // Render groups
+    Object.keys(categories).forEach(catName => {
+        const groupEl = document.createElement('div');
+        groupEl.className = 'scene-category-group';
+
+        const titleEl = document.createElement('h3');
+        titleEl.textContent = catName;
+        titleEl.className = 'category-title';
+        groupEl.appendChild(titleEl);
+
+        const gridEl = document.createElement('div');
+        gridEl.className = 'options-grid';
+
+        categories[catName].forEach(item => {
+            const el = document.createElement('div');
+            el.className = 'option-card';
+            el.textContent = item.label;
+            el.dataset.value = item.value;
+            el.dataset.tooltip = item.value;
+            // Scene selection updates the Subject input directly
+            el.onclick = () => selectScene(item.value, el, container);
+            gridEl.appendChild(el);
+        });
+
+        groupEl.appendChild(gridEl);
+        container.appendChild(groupEl);
+    });
+}
+
+function selectScene(value, element, container) {
+    // Update state and input
+    state.subject = value;
+    subjectInput.value = value;
+
+    // Manage visual selection state (radio behavior across all scenes)
+    // First, clear all selected states in the scenes container
+    const allCards = container.querySelectorAll('.option-card');
+    allCards.forEach(card => card.classList.remove('selected'));
+
+    // Select clicked
+    element.classList.add('selected');
+
+    updatePrompt();
 }
 
 // Render Helper
@@ -100,6 +284,7 @@ function renderOptions(items, container, category) {
         el.className = 'option-card';
         el.textContent = item.label;
         el.dataset.value = item.value;
+        el.dataset.tooltip = item.value; // Tooltip content
         el.onclick = () => selectOption(category, item.value, el, container);
         container.appendChild(el);
     });
@@ -121,15 +306,57 @@ function selectOption(category, value, element, container) {
 }
 
 // Update Prompt Text
+// Update Prompt Text
 function updatePrompt() {
-    const mainPromptParts = [
-        state.subject,
-        state.angle,
-        state.movement,
-        state.style
-    ].filter(part => part && part.trim() !== "");
+    let finalPrompt = "";
 
-    let finalPrompt = mainPromptParts.join(", ");
+    if (currentMode === 'simple') {
+        const mainPromptParts = [
+            state.subject,
+            state.angle,
+            state.movement,
+            state.style
+        ].filter(part => part && part.trim() !== "");
+        finalPrompt = mainPromptParts.join(", ");
+    } else {
+        // Advanced Mode Logic
+        const { shot, action, camera, lighting, format } = advancedState;
+
+        // Remove empty values for checking
+        const hasShot = shot && shot.trim() !== "";
+        const hasAction = action && action.trim() !== "";
+        const hasCamera = camera && camera.trim() !== "";
+        const hasLighting = lighting && lighting.trim() !== "";
+
+        if (format === 'standard') {
+            // Standard: (shot), (action)...
+            const parts = [];
+            if (hasShot) parts.push(`(${shot})`);
+            if (hasAction) parts.push(`(${action})`);
+            if (hasCamera) parts.push(`(${camera})`);
+            if (hasLighting) parts.push(`(${lighting})`);
+            finalPrompt = parts.join(", ");
+        } else if (format === 'structured') {
+            // Structured: [Shot: ...] [Action: ...]
+            const parts = [];
+            if (hasShot) parts.push(`[Shot: ${shot}]`);
+            if (hasAction) parts.push(`[Action: ${action}]`);
+            if (hasCamera) parts.push(`[Camera: ${camera}]`);
+            if (hasLighting) parts.push(`[Lighting: ${lighting}]`);
+            finalPrompt = parts.join(" ");
+        } else if (format === 'narrative') {
+            // Narrative style
+            let narrative = "";
+            if (hasShot) narrative += `A ${shot} showing `;
+            if (hasAction) narrative += `${action}`;
+            else narrative += `a scene`;
+
+            if (hasCamera) narrative += `, filmed with ${camera} movement`;
+            if (hasLighting) narrative += `. Lighting is ${lighting}`;
+
+            finalPrompt = narrative.trim();
+        }
+    }
 
     // Platform Specific logic
     if (state.platform === 'vidu') {
